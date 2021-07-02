@@ -4,12 +4,27 @@ SQL Stored Procedure to illustrate dynamically pivoting the data.
 Dynamic slicing and dicing of data by transposing data into columns to help in data analysis.
 
 # Sample Dataset
+| Application Family | Application Status | AppCount |
+| ------------: | ------------: | -----------: |
+| Record Keeping | Production | 50 |
+| Record Keeping | Prod-DR | 50 |
+| Record Keeping | UAT | 20 |
+| Record Keeping | Development | 20 |
+| Reporting and Metrics | Production | 10 |
+| Reporting and Metrics | Prod-DR | 10 |
+| Reporting and Metrics | UAT | 5 |
+| Reporting and Metrics | Development | 5 |
+
+
+```````````````````````````````````````
 CREATE TABLE ApplicationCountByStatus(
   [ApplicationFamily] VARCHAR(50),
   [ApplicationStatus] VARCHAR(50),
   [AppCount]   INT
 )
 GO
+
+
  
 INSERT INTO ApplicationCountByStatus VALUES 
 ('Record Keeping','Production',50),
@@ -21,6 +36,7 @@ INSERT INTO ApplicationCountByStatus VALUES
 ('Reporting and Metrics','UAT',5),
 ('Reporting and Metrics','Development',5)
 GO
+`````````````````````````````````````````````
 
 # Desired Output
 | Application Family | Production | Prod-DR | UAT | Development |
