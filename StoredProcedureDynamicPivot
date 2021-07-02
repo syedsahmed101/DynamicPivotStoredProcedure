@@ -1,0 +1,27 @@
+CREATE PROCEDURE dbo.DynamicPivotSql
+  @PivotColumn NVARCHAR(255),
+  @DataToPivot NVARCHAR(255)
+AS
+BEGIN
+ 
+  DECLARE @Sql NVARCHAR(MAX)
+  SET @Sql = N'
+    SELECT * FROM (
+      SELECT
+        ApplicationFamily,
+        ApplicationStatus,
+        AppCount
+      FROM ApplicationCountByStatus
+    ) Results
+    PIVOT (
+      SUM(AppCount)
+      FOR ['+@PivotColumn+']
+      IN (
+        '+@DataToPivot+'
+      )
+    ) AS PivotTable
+  ';
+ 
+  EXEC(@Sql)
+ 
+END
