@@ -1,6 +1,6 @@
 CREATE PROCEDURE dbo.DynamicPivotSql
-  @PivotColumn  NVARCHAR(255),
-  @DataToPivot    NVARCHAR(255)
+  @PivotColumn NVARCHAR(255),
+  @DataToPivot NVARCHAR(255)
 AS
 BEGIN
  
@@ -11,17 +11,17 @@ BEGIN
         ApplicationFamily,
         ApplicationStatus,
         AppCount
-      FROM App
-    ) StudentResults
+      FROM ApplicationCountByStatus
+    ) Results
     PIVOT (
-      SUM([Marks])
-      FOR ['+@ColumnToPivot+']
+      SUM(AppCount)
+      FOR ['+@PivotColumn+']
       IN (
-        '+@ListToPivot+'
+        '+@DataToPivot+'
       )
     ) AS PivotTable
   ';
  
-  EXEC(@SqlStatement)
+  EXEC(@Sql)
  
 END
