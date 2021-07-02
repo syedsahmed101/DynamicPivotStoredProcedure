@@ -1,4 +1,4 @@
-CREATE PROCEDURE dbo.DynamicPivotSql
+CREATE PROCEDURE dbo.DynamicPivotStoredProcedure
   @PivotColumn NVARCHAR(255),
   @DataToPivot NVARCHAR(255)
 AS
