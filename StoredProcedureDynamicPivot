@@ -9,7 +9,7 @@ BEGIN
     SELECT * FROM (
       SELECT
         ApplicationFamily,
-        ApplicationStatus,
+        Environment,
         AppCount
       FROM ApplicationCountByStatus
     ) Results
